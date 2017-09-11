@@ -28,7 +28,7 @@ def main():
     """ Calls the   TEST   functions in this module. """
     test_draw_squares_from_circle()
     test_draw_circles_from_rectangle()
-    #test_draw_lines_from_rectangles()
+    test_draw_lines_from_rectangles()
 
 
 def test_draw_squares_from_circle():
@@ -227,7 +227,7 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
     window.render()
 
     # ------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # CONSIDER using the ACCUMULATOR IN GRAPHICS pattern,
@@ -316,6 +316,21 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
       :type n: int
       :type window: rg.RoseWindow
       """
+    rectangle1center = rectangle1.get_center()
+    rectangle2center = rectangle2.get_center()
+    #line = rg.Line(rg.Point(rectangle1center.x, rectangle1center.y), rg.Point(rectangle2center.x, rectangle2center.y))
+    dx = rectangle1.get_center().x - rectangle1.get_lower_left_corner().x
+    dy = rectangle1.get_center().y - rectangle1.get_lower_left_corner().y
+    for k in range(n):
+        line = rg.Line(rg.Point(rectangle1center.x - dx*k, rectangle1center.y - dy*k),rg.Point(rectangle2center.x - dx*k, rectangle2center.y - dy*k))
+        if(k % 2 == 0):
+            line.color = rectangle1.outline_color
+        else:
+            line.color = rectangle2.outline_color
+        line.attach_to(window)
+        rectangle1.attach_to(window)
+        rectangle2.attach_to(window)
+    window.render()
     # ------------------------------------------------------------------
     # TODO: 5. Implement and test this function.
     #          Tests have been written for you (above).
