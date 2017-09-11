@@ -9,8 +9,8 @@ Additionally, it emphasizes that you must
 before you can implement a solution to the problem in Python. 
   
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and David Gruninger.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -82,7 +82,6 @@ def draw_squares_from_circle(n, circle, window):
     Side effects:
       See   draw_squares_from_circle.pdf   in this project for pictures
         that may help you better understand the following specification:
-
       First draws the given rg.Circle on the given rg.RoseWindow.
       Then draws  n  rg.Squares on the given rg.RoseWindow, such that:
         -- The first rg.Square circumscribes the given rg.Circle.
@@ -97,6 +96,16 @@ def draw_squares_from_circle(n, circle, window):
       :type circle: rg.Circle
       :type window: rg.RoseWindow
     """
+    diamcircle = (circle.radius * 2)
+    cencircle = circle.center
+    circleradius = diamcircle / 2
+    circle.attach_to(window)
+    for k in range(n):
+        square = rg.Square(cencircle, diamcircle)
+        square.center = rg.Point((cencircle.x + (circleradius * k)),(cencircle.y + (circleradius * k) ))
+        square.attach_to(window)
+
+    window.render()
     # ------------------------------------------------------------------
     # TODO: 2. Implement and test this function.
     #          Tests have been written for you (above).
